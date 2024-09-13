@@ -1,0 +1,9 @@
+config {
+    type: "table"
+}
+
+SELECT
+  *
+FROM
+  `${constants.PROJECT_ID}.mydataset.mytable`
+
