@@ -1,9 +1,18 @@
+-- Replace the existing query with your new join query
 config {
-    type: "table"
+  type: "table",
+  name: "my_custom_table_name"
 }
 
+-- Perform the join operation
 SELECT
-  *
+  a.*
 FROM
-  `${constants.PROJECT_ID}.mydataset.mytable`
+  `${constants.SRC_PROJECT_ID}.${constants.SRC_DATASET_ID}.mytable` AS a
+LEFT JOIN
+  `${constants.SRC_PROJECT_ID}.${constants.SRC_DATASET_ID}.second_table` AS b
+ON
+ (b.coluna1 = a.coluna1)
+
+
 
