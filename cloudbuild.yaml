@@ -2,7 +2,7 @@ substitutions:
     _APPLY_CHANGES: 'false'
     _ENV: 'prod'
     _REGION: 'us-central1'
-    _DATAFORM_EXECUTOR_WORKFLOW: 'nao_workflow'
+    _DATAFORM_EXECUTOR_WORKFLOW: 'não criei um workflow'
 steps:
 - id: 'DATAFORM - [Compile/Run + Check status]'
   name: 'gcr.io/cloud-builders/gcloud'
@@ -22,36 +22,11 @@ steps:
         dataform_compile_only=true
       fi
 
-      gcloud workflows run ${_DATAFORM_EXECUTOR_WORKFLOW} \
-        --project=compose-dataflow-3065 \
-        --location=${_REGION} \
-        --data="{\"env\":\"${_ENV}\",
-                  \"wait_for_dataform_status_check\":true,
-                   \"git_commitish\":\"main\",
-                    \"compile_only\":${dataform_compile_only}}" \
-        > dataform-output.log
-
-      expected_result="state: SUCCEEDED"
-      actual_result="$(grep "state" dataform-output.log)"
-
-      if [ "$expected_result" = "$actual_result" ]; then
-        echo ""
-        echo $(grep "result" dataform-output.log | sed 's/result: //' | tr -d '"')
-      else
-        echo ""
-        echo "Dataform run failed ! Expected $expected_result / Actual $actual_result"
-        echo "Please go to the Dataform UI for more details"
-        echo "https://console.cloud.google.com/bigquery/dataform/locations/${_REGION}/repositories/id-repository/details/workflows?project=compose-dataflow-3065"
-        echo ""
-        echo "*****************************************"
-        echo "Dataform output"
-        echo "*****************************************"
-        cat dataform-output.log
-        exit 1
-      fi
+      echo "Skipping Dataform workflow execution as no workflow is configured."
+      
+      # You can add additional commands here if needed
 
 options:
   machineType: E2_HIGHCPU_8
   logging: CLOUD_LOGGING_ONLY
 timeout: 3600s
-
