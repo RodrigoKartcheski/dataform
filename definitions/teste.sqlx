@@ -13,6 +13,6 @@ LEFT JOIN
   `${constants.SRC_PROJECT_ID}.${constants.SRC_DATASET_ID}.second_table` AS b
 ON
  (b.coluna1 = a.coluna1)
-
+-- coodd
 
 
