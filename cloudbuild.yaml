@@ -1,0 +1,28 @@
+steps:
+  # Step 1: Checkout do código do repositório do GitHub
+  - name: 'gcr.io/cloud-builders/git'
+    args: ['clone', 'https://github.com/usuario/repositorio.git']
+  
+  # Step 2: Navegar até o diretório do projeto Dataform (se necessário)
+  - name: 'alpine'
+    entrypoint: 'sh'
+    args:
+      - '-c'
+      - 'cd /workspace/repositorio/dataform'
+
+  # Step 3: Instalar dependências do Dataform
+  - name: 'docker://dataformco/dataform:1.6.11'
+    args: ['install']
+
+  # Step 4: Rodar o comando de compilação do Dataform
+  - name: 'docker://dataformco/dataform:1.6.11'
+    args: ['compile']
+
+  # Step 5: Executar validação ou testes (opcional)
+  - name: 'docker://dataformco/dataform:1.6.11'
+    args: ['run']
+  
+timeout: '1200s'
+
+options:
+  logging: CLOUD_LOGGING_ONLY
