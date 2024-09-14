@@ -14,7 +14,7 @@ steps:
       - '-c'
       - |
         echo "Installing project dependencies..."
-        dataform install
+        dataform install --config /workspace/workflow_settings.yaml
 
   - name: 'dataformco/dataform:1.6.11'
     entrypoint: 'bash'
@@ -22,10 +22,11 @@ steps:
       - '-c'
       - |
         echo "Running dataform compile..."
-        dataform compile
+        dataform compile --config /workspace/workflow_settings.yaml
 
 options:
   machineType: E2_HIGHCPU_8
   logging: CLOUD_LOGGING_ONLY
 timeout: 3600s
+
 
