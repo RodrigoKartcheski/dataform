@@ -1,7 +1,8 @@
 config {
     type: "table"
 }
+
 SELECT
   *
 FROM
-  ${ref(my_custom_table_name)}
+  `${constants.SRC_PROJECT_ID}.${constants.SRC_DATASET_ID}.mytable`
