@@ -4,4 +4,4 @@ config {
 SELECT
   *
 FROM
-  ${ref(fonte)}
+  `${constants.SRC_PROJECT_ID}.${constants.SRC_DATASET_ID}.mytable`
