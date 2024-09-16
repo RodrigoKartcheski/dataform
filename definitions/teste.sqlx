@@ -1,7 +1,11 @@
+-- definitions/teste.sqlx
 -- Replace the existing query with your new join query
 config {
   type: "table",
-  name: "my_custom_table_name"
+  name: "my_custom_table_name",
+  tags: [
+    "hourly"
+  ]
 }
 
 -- Perform the join operation
