@@ -1,0 +1,14 @@
+config {
+    type: "incremental",
+    protected: true,
+    uniqueKey: ["coluna1"]
+}
+
+SELECT
+  *
+FROM
+  ${ref("fonte")}
+WHERE 
+  coluna1 NOT IN (
+    SELECT coluna1 FROM ${self()}  -- O "${this}" refere-se à tabela destino no Dataform
+  )
