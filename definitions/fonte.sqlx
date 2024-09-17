@@ -8,4 +8,4 @@ config {
 SELECT
   a.*
 FROM
-  `${constants.SRC_PROJECT_ID}.${constants.SRC_DATASET_ID}.mytable`
+  `${constants.SRC_PROJECT_ID}.${constants.SRC_DATASET_ID}.mytable` a
