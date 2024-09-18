@@ -1,4 +1,4 @@
- const scd = require("dataform-scd");
+const scd = require("dataform-scd");
 
  scd("source_data_scd", {
   uniqueKey: "coluna1",
