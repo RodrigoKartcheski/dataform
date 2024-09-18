@@ -5,9 +5,9 @@
   timestamp: "updated_at", // A field that stores a timestamp or date of when the row was last changed.
   source: {
     schema: "dataform",     // The source table to build slowly changing dimensions from.
-    name: "fonte",
+    name: "fonte_copy",
   },
-  columns: {coluna1: "coluna1", coluna1: "coluna2", updated_at: "Timestamp for updates"},
+  columns: {coluna1: "coluna1", coluna2: "coluna2", updated_at: "Timestamp for updates"},
   incrementalConfig: {        // Any configuration parameters to apply to the incremental table that will be created.
     bigquery: {
       partitionBy: "updated_at",
