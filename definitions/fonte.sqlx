@@ -6,6 +6,7 @@ config {
 
 -- Perform the join operation
 SELECT
-  a.*
+  a.*,
+  TIMESTAMP_TRUNC('2024-01-01 00:00:00 UTC', SECOND) AS updated_at
 FROM
   `${constants.SRC_PROJECT_ID}.${constants.SRC_DATASET_ID}.mytable` a
