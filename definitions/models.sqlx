@@ -7,8 +7,12 @@ config {
 SELECT
   *
 FROM
-  ${ref("fonte")}
+  ${ref("fonte")} fonte
 WHERE 
   coluna1 NOT IN (
-    SELECT coluna1 FROM ${self()}  -- O "${this}" refere-se à tabela destino no Dataform
+    SELECT coluna1 FROM ${self()}
   )
+
+
+
+  
