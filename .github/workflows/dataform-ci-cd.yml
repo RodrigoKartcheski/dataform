@@ -1,0 +1,74 @@
+name: Dataform CI/CD
+
+on:
+  push:
+    branches:
+      - main  # A branch principal do seu repositório GitHub
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Check out repository
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16'  # Escolha a versão do Node.js necessária para o seu projeto
+    
+    - name: Install dependencies
+      run: |
+        npm install  # Instala as dependências do Dataform
+    
+    - name: Set up Dataform CLI
+      run: |
+        npm install -g @dataform/cli  # Instala o Dataform CLI
+    
+    - name: Authenticate with Dataform
+      run: |
+        echo "DF_USER=${{ secrets.DATAFORM_USER }}" >> $GITHUB_ENV
+        echo "DF_PASSWORD=${{ secrets.DATAFORM_PASSWORD }}" >> $GITHUB_ENV
+        echo "DF_PROJECT_ID=${{ secrets.DATAFORM_PROJECT_ID }}" >> $GITHUB_ENV
+
+    - name: Run Dataform compile
+      run: |
+        dataform compile  # Realiza a compilação do seu projeto Dataform
+    
+    - name: Run Dataform run
+      run: |
+        dataform run  # Executa o pipeline de Dataform (compilação e execução)
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+    - name: Check out repository
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16'  # Versão do Node.js necessária para o seu projeto
+    
+    - name: Install dependencies
+      run: |
+        npm install  # Instala as dependências do Dataform
+    
+    - name: Set up Dataform CLI
+      run: |
+        npm install -g @dataform/cli  # Instala o Dataform CLI
+    
+    - name: Authenticate with Dataform
+      run: |
+        echo "DF_USER=${{ secrets.DATAFORM_USER }}" >> $GITHUB_ENV
+        echo "DF_PASSWORD=${{ secrets.DATAFORM_PASSWORD }}" >> $GITHUB_ENV
+        echo "DF_PROJECT_ID=${{ secrets.DATAFORM_PROJECT_ID }}" >> $GITHUB_ENV
+
+    - name: Deploy Dataform to project
+      run: |
+        dataform run  # Executa o pipeline no ambiente de produção
