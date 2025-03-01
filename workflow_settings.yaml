@@ -1,5 +1,12 @@
+<<<<<<< HEAD
 defaultProject: dataplex-experience-6133
 defaultLocation: us-central1
 defaultDataset: zona_1
 defaultAssertionDataset: dataform_assertions
 dataformCoreVersion: 3.0.0
+=======
+defaultProject: compose-dataflow-3065
+defaultLocation: us-central1
+defaultDataset: dataform
+defaultAssertionDataset: dataform_assertions
+>>>>>>> refs/heads/main
